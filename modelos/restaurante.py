@@ -1,18 +1,26 @@
 # Definindo a classe Restaurante
 class Restaurante:
+    restaurantes = []
+
+    # Método Especial da classe  (inicializa o objeto com nome e categoria fornecidos)
     def __init__(self, nome, categoria):
-        # Inicializa o objeto com nome e categoria fornecidos
         self.nome = nome
         self.categoria = categoria
-        self.ativo = False # Atributo adicional que começa como False
+        self.ativo = False          # Atributo adicional que começa como False
+        Restaurante.restaurantes.append(self)
+
+    # Método Especial da classe 
+    def __str__(self):
+        self.nome
+        return f'{self.nome} | {self.categoria}'
+    
+    # Próprio Método
+    def listar_restaurantes():
+        for restaurante in Restaurante.restaurantes:
+            print(f'{restaurante.nome} | {restaurante.categoria} | {restaurante.ativo}')
 
 # Criando instâncias da classe Restaurante
 restaurante_praca = Restaurante('Praça', 'Gourmet')
-restaurante_pizza = Restaurante('Pizza Express', 'Italiana')
+restaurante_pizza = Restaurante('Pizza', 'Italiana')
 
-# Criando uma lista de restaurantes
-restaurantes = [restaurante_praca, restaurante_pizza]
-
-# Imprimindo os atributos dos objetos usando vars()
-print(vars(restaurante_praca))
-print(vars(restaurante_pizza))
+Restaurante.listar_restaurantes()
