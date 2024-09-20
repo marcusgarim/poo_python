@@ -1,26 +1,31 @@
 # Definindo a classe Restaurante
 class Restaurante:
-    restaurantes = []
-
-    # Método Especial da classe  (inicializa o objeto com nome e categoria fornecidos)
-    def __init__(self, nome, categoria):
-        self.nome = nome
+    restaurantes = []                           # Lista que irá armazenar todas as instâncias de restaurantes criadas
+  
+    def __init__(self, nome, categoria):        # Método especial de inicialização (__init__) chamado sempre que um novo objeto da classe Restaurante for criado
+        self.nome = nome                        # Atributos 'nome' e 'categoria' do restaurante
         self.categoria = categoria
-        self.ativo = False          # Atributo adicional que começa como False
-        Restaurante.restaurantes.append(self)
+        self._ativo = False                     # Atributo '_ativo' que indica se o restaurante está aberto ou fechado (começa como False, ou seja, fechado)
+        Restaurante.restaurantes.append(self)   # Adiciona a nova instância do restaurante à lista de restaurantes da classe
 
-    # Método Especial da classe 
-    def __str__(self):
-        self.nome
-        return f'{self.nome} | {self.categoria}'
-    
-    # Próprio Método
+    def __str__(self):                                                      # Método especial __str__ que define a representação em string de um objeto da classe
+        return f'{self.nome} | {self.categoria}'                            # Retorna o nome e a categoria do restaurante formatados
+
+    # Método da classe (sem o "self" pois ele atua na classe, não nas instâncias) que lista todos os restaurantes criados
     def listar_restaurantes():
-        for restaurante in Restaurante.restaurantes:
-            print(f'{restaurante.nome} | {restaurante.categoria} | {restaurante.ativo}')
+       
+        print(f'{'NOME'.ljust(25)} | {'CATEGORIA'.ljust(25)} | {'STATUS'}') # Cabeçalho da tabela com nome, categoria e status dos restaurantes
+        
+        for restaurante in Restaurante.restaurantes:                        # Para cada restaurante na lista de restaurantes, imprime as informações formatadas
+            print(f'{restaurante.nome.ljust(25)} | {restaurante.categoria.ljust(25)} | {restaurante.ativo}')
+
+    @property                                                               # Propriedade que define o comportamento do atributo 'ativo' (o decorador @property para acessar o valor de _ativo como uma propriedade.). 
+    def ativo(self):
+        return 'Aberto' if self._ativo else 'Fechado'                       # Retorna 'Aberto' se _ativo for True, caso contrário, 'Fechado'
 
 # Criando instâncias da classe Restaurante
 restaurante_praca = Restaurante('Praça', 'Gourmet')
 restaurante_pizza = Restaurante('Pizza', 'Italiana')
 
+# Chamando o método que lista todos os restaurantes
 Restaurante.listar_restaurantes()
